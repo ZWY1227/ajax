@@ -1,0 +1,14 @@
+<script>
+    let xhr = new XMLHttpRequest();
+    xhr.open("get","./data.json");
+    // readystatechange 是一个事件  当xhr的状态改变了 就会触发监听器
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        // xhr.status表示得到http状态码
+        if(xhr.readyState == 4 && xhr.status == 200){
+            // 获取数据
+        }
+    }
+    xhr.send(null);
+</script>
+

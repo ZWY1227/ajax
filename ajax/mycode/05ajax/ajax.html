@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初识ajax</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 创建xhr对象·
+    let xhr=new XMLHttpRequest
+    // 打开请求连接
+    xhr.open("get","data.json?a=1&b=2",true)
+    // 监听请求状态（0，1，2，3，4）
+   xhr.onreadystatechange=function(){
+       if(xhr.readyState==4&&xhr.status==200){
+           console.log(xhr)
+           console.log(xhr.responseText)
+       }
+   }
+//    发送ajax请求
+    xhr.send()
+
+</script>

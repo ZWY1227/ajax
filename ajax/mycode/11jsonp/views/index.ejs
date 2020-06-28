@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsonp原理</title>
+</head>
+<body>
+    <div>
+        <h1>使用jsonp原理完成请求</h1>
+        <button id="btn">点击我获取4000端口的数据</button>
+    </div>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    $("#btn").click(function(){
+        // console.log("12111")
+        jsFun("http://127.0.0.1:4000/jsonp?callback=f1")
+    })
+    function f1(res){
+        console.log(res)
+    }
+    // 创建一个script标签
+    function jsFun(src){
+        let script=document.createElement("script")
+        script.src=src;
+        document.body.appendChild(script)
+    }
+</script>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域问题</title>
+    <script src="/jquery1.11.3.js"></script>
+</head>
+<body>
+    <h1>演示跨域问题</h1>
+    <button id="btn">ajax请求数据</button>
+</body>
+<script>
+
+    btn.onclick = function(){
+        // addScript("http://localhost:3000/test.js")
+        addScript("http://localhost:3000/jsonp?callback=f1")
+    }
+    function f1(res){
+        console.log(res)
+    }
+    // 服务器响应 f1('hello')
+    
+    // 封装一个函数，动态创建script标签
+    function addScript(src){
+        let script = document.createElement("script");
+        script.src = src;
+        document.body.appendChild(script)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*  $("#btn").on("click", function () {
+        $.ajax({
+            url:"http://localhost:4000/stu",
+            type: "get",
+            dataType: "jsonp", // 使用jsonp解决跨域
+            success: function (res) {
+                console.log(res)
+            }
+        })
+    })
+ */
+
+
+
+
+   /*  $("#btn").on("click", function () {
+        let realUrl = "http://localhost:4000/stu";
+        $.ajax({
+            // url: "http://localhost:4000/stu",
+            url:"/proxy",
+            data:{realUrl},
+            type: "get",
+            dataType: "json",
+            success: function (res) {
+                console.log(res)
+            }
+        })
+    }) */
+
+
+    /* $("#btn").on("click", function () {
+        $.ajax({
+            url: "http://localhost:4000/stu",
+            type: "put",
+            // xhrFields: {
+            //     withCredentials: true // 这里设置了withCredentials
+            // },
+            dataType: "json",
+            success: function (res) {
+                console.log(res)
+            }
+        })
+    }) */
+
+
+    /* $("#btn").on("click",function(){
+        $.ajax({
+            url:"https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=6956484",
+            type:"get",
+            dataType:"json",
+            success:function(res){
+                console.log(res)
+            }
+        })
+    }) */
+</script>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+        li {
+            margin: 20px;
+            list-style: none;
+        }
+        form{
+            width: 600px;
+            height: 500px;
+            background-color: pink;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="">
+        <h1>注册用户页面：</h1>
+        <ul>
+            <li>
+                <label for="">用户名:</label>
+                <input type="text" name="username" placeholder="请输入用户名" id="user"><span id="span"></span>
+            </li>
+            <li>
+                <label for="">请输入密码:</label>
+                <input type="text" name="password" placeholder="请输入用户名">
+            </li>
+            <li>
+                <label for="">请确认密码:</label>
+                <input type="text" name="repassword" placeholder="请输入用户名">
+            </li>
+            <li>
+                <input type="submit" value="注册">
+            </li>
+        </ul>
+    </form>
+</body>
+</html>
+<script>
+//   获取input框
+let input=document.getElementById("user")
+let span=document.getElementById("span")
+input.onblur=function(){
+    let username=this.value
+    let xhr=new XMLHttpRequest()
+    xhr.open("get","/regist?username="+username)
+    xhr.onreadystatechange=function(){
+        span.innerHTML=xhr.responseText
+    }
+    xhr.send(null)
+}
+
+</script>

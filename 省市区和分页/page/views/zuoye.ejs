@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用ajax开启分页效果</title>
+    <style>
+        .box {
+            width: 800px;
+            background-color: #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        ul {
+            border: 1px solid rgb(160, 160, 240);
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        li {
+            list-style: none;
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #999;
+        }
+
+        li span:nth-child(1) {
+            margin-right: 30px;
+        }
+
+        li span p:nth-child(1) {
+            font-size: 18px;
+            color: #333;
+        }
+
+        li span p:nth-child(2) {
+            font-size: 16px;
+            color: #999;
+        }
+
+        .footer {
+            margin-left: 277px;
+            width: 240px;
+            height: 52px;
+            background: blue;
+            text-align: center;
+            line-height: 52px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .div {
+            height: 68px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>我的新闻列表</h1>
+        <ul class="ul">
+        </ul>
+        <div class="div">
+            <div class="footer">
+                查看更多
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    let flag = true;
+    let page = 1
+    function getInfo(page){
+    $.ajax({
+        url: "/news",
+        type: "get",
+        data: { page },
+        dataType: "json",
+        success: function (data) {
+            console.log(data)
+            let str = ""
+            if (data.arr.length) {
+                for (var i = 0; i < data.arr.length; i++) {
+                    console.log(data.arr[i].Ititle)
+                    str += ` <li>
+                <span>
+                    <img src="${data.arr[i].Ifileurl}" alt="">
+                </span>
+                <span>
+                    <p>${data.arr[i].Ititle}</p>
+                    <p>${data.arr[i].Icontent}</p>
+                </span>
+            </li>`
+                }
+                $(".ul").append(str)
+                $(".footer").text("点击加载更多哦")
+            } else {
+                flag = false
+                $(".footer").text("已经加载完毕喽")
+            }
+        }
+    })
+ } 
+ getInfo(page)
+ $(".footer").click(function (){
+        $(this).text("正在拼命加载中~~~")
+        if(flag){
+            getInfo(++page)
+
+        }
+    })
+
+
+
+</script>

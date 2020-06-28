@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最后一遍认真对待</title>
+</head>
+<body>
+    <div>
+        <h1>使用jsonp跨域请求数据的原理</h1>
+        <button id="btn">点击我跨域请求4000端口数据</button>
+    </div>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    $("#btn").click(function(){
+        // console.log("111")
+        addScript("http://127.0.0.1:4000/jsonp?callback=f1")
+    })
+    function f1(res){
+        console.log(res)
+
+    }
+    function addScript(src){
+        let script=document.createElement("script")
+        script.src=src
+        document.body.appendChild(script)
+    }
+
+
+</script>

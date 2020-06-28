@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟使用cors解决跨域问题</title>
+</head>
+<body>
+    <div>
+        <h1>模拟使用cors解决跨域问题</h1>
+        <button id="btn">点击我来向服务器发起请求</button>
+    </div>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    $("#btn").on("click",function(){
+        $.ajax({
+            url:"http://127.0.0.1:4000/a",
+            type:"post",//注意这里需要小写
+            dataType:"json",
+            xhrFields:{
+                withCredentials:true
+            },
+            success:function(res){
+                // alert("成功")
+                console.log(res)
+            },
+            error:function(err){
+                console.log(err)
+            }
+        })
+    })
+
+</script>

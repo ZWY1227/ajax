@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+        li {
+            margin: 20px;
+            list-style: none;
+        }
+        form{
+            width: 600px;
+            height: 500px;
+            background-color: pink;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="">
+        <h1>注册用户页面：</h1>
+        <ul>
+            <li>
+                <label for="">用户名:</label>
+                <input type="text" name="username" placeholder="请输入用户名" id="user"><span id="span"></span>
+            </li>
+            <li>
+                <label for="">请输入密码:</label>
+                <input type="text" name="password" placeholder="请输入用户名">
+            </li>
+            <li>
+                <label for="">请确认密码:</label>
+                <input type="text" name="repassword" placeholder="请输入用户名">
+            </li>
+            <li>
+                <input type="submit" value="注册">
+            </li>
+        </ul>
+    </form>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+  $("#user").blur(function(){
+      let username=$(this).val()
+      let dat={username}
+    //   使用get
+    //   $.get("/regist",dat,function(res){
+    //     console.log(res)
+    //     $("#span").text(res.msg)
+    //   })
+    // 使用post
+    //   $.post("/regist",dat,function(res){
+    //     console.log(res)
+    //     $("#span").text(res.msg)
+    //   })
+    // 使用ajax
+    $.ajax({
+        url:"/regist",
+        type:"get",
+        data:{username},
+        dataType:"json",
+        async:true,
+        success:function(res){
+            console.log(res)
+            $("#span").text(res.msg)
+        },
+        error:function(err){
+            console.log(err)
+        }
+    })
+    
+  })
+
+</script>

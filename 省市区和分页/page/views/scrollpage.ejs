@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用ajax开启分页效果</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .box {
+            width: 800px;
+            /* background-color: #ccc; */
+            margin: 100px auto;
+            position: relative;
+        }
+
+        ul {
+            border: 1px solid rgb(160, 160, 240);
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        li {
+            list-style: none;
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #999;
+            height: 150px;
+        }
+
+        li span:nth-child(1) {
+            margin-right: 30px;
+        }
+
+        li span p:nth-child(1) {
+            font-size: 18px;
+            color: #333;
+        }
+
+        li span p:nth-child(2) {
+            font-size: 16px;
+            color: #999;
+        }
+
+        footer img {
+            width: 82px;
+            height: 55px;
+            margin-left: 355px;
+        }
+
+        .p {
+            margin-left: 340px;
+        }
+
+        .div {
+            height: 68px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>我的新闻列表</h1>
+        <ul class="ul">
+        </ul>
+        <footer class="foo" style="display: none;">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1585903306584&di=c858c3ebaf3c1b97b845fc031db6708a&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1253356673%2C446469939%26fm%3D214%26gp%3D0.jpg"
+                alt="">
+            <p class="p">正在拼命加载中...</p>
+        </footer>
+    </div>
+</body>
+
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    // let page = 1
+    // $(document).scroll(function(){   
+    //     let srcollHeight=$(window).scrollTop();//屏幕卷去的高度
+    //     let clentHeight=$(window).height();//屏幕的高度
+    //     let pageHeight=$(document).height();//文档的高度
+    //     console.log(srcollHeight,clentHeight,pageHeight)
+    //     if(srcollHeight+clentHeight==pageHeight){
+    //         console.log(srcollHeight,clentHeight,pageHeight)
+    //         getInfo(++page) 
+    //     }
+    // })
+    // $(".foo").hide()
+    // function getInfo(){
+    //     $(".foo").show()
+    //     $.ajax({
+    //     url: "/srcoll",
+    //     type: "get",
+    //     data: { page },
+    //     dataType: "json",
+    //     success: function (data){
+    //         if(data.length){
+    //             let str = ""
+    //         for (var i = 0; i < data.length; i++) {
+    //             console.log(data[i].Ititle)
+    //             str += `<li>
+    //             <span>
+    //                 <img src="${data[i].Ifileurl}" alt="">
+    //             </span>
+    //             <span>
+    //                 <p>${data[i].Ititle}</p>
+    //                 <p>${data[i].Icontent}</p>
+    //             </span>
+    //         </li>`
+    //         }
+    //         $(".ul").append(str)
+    //     }else{
+    //         $("img").hide()
+    //         $(".p").hide()
+    //         $(".foo").text("人家是有底线的啦~~")
+    //         $(".foo").css("marginLeft","330px")
+    //     }
+    //  }      
+    // })
+    // }
+    // getInfo(page)
+    // ==========================================
+    $(".foo").hide()
+    let page = 1;
+    let flag=true;
+    $(document).scroll(function () {
+        let scrollTop = $(window).scrollTop()
+        let clientHeight = $(window).height()
+        let pageHeight = $(document).height()
+        if (scrollTop + clientHeight == pageHeight) {
+            if(flag){
+                getInfo(++page)
+            }
+          
+        }
+    })
+    let getInfo=function  (page) {
+        $(".foo").show()
+            $.ajax({
+                url: "/scroll",
+                type: "get",
+                data: { "page": page },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data)
+                    if (data.arr.length) {
+                        let str = ""
+                        data.arr.forEach(item => {
+                            str += `<li>
+                             <span>
+                                 <img src="${item.Ifileurl}">
+                             </span>
+                             <span>
+                                 <p>${item.Ititle}</p>
+                                 <p>${item.Icontent}</p>
+                             </span>
+                         </li>`
+                        })
+                        $(".ul").append(str)
+                    } else {
+                        $("img").hide()
+                        $(".p").hide()
+                        $(".foo").text("人家是有底线的啦~~")
+                        $(".foo").css("marginLeft", "330px"); 
+                        // getInfo=function(data){}
+                        flag=false
+                    }
+                }
+            })
+        }
+    
+        getInfo(page)
+
+
+
+
+
+</script>

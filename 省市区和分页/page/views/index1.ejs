@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>没有ajax的分页效果</title>
+    <style>
+        .box {
+            width: 800px;
+            height: 900px;
+            background-color: #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        ul {
+            border: 1px solid rgb(160, 160, 240);
+        }
+
+        h1 {
+            text-align: center;
+            padding-top:10px;
+        }
+
+        li {
+            list-style: none;
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #999;
+        }
+
+        li span:nth-child(1) {
+            margin-right: 30px;
+        }
+
+        li span p:nth-child(1) {
+            font-size: 18px;
+            color: #333;
+        }
+
+        li span p:nth-child(2) {
+            font-size: 16px;
+            color: #999;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 34px;
+            left: 155px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>我的新闻列表</h1>
+        <ul class="ul">
+            <% arr.forEach(item=>{ %>
+             <li>
+                <span>
+                    <img src="<%= item.Ifileurl %>" alt="">
+                </span>
+                <span>
+                    <p><%= item.Ititle %></p>
+                    <p><%= item.Icontent %></p>
+                </span>
+            </li>
+            <% } )%>
+        </ul>
+        <div class="footer">
+            <p>共<span class="sum"><%= sum %></span>条新闻，当前是<span class="page"><%= page %></span>/<span class="pages"><%= pages %></span>页&nbsp;&nbsp;
+                <a href="/new?page=<%= page-1 %>" id="font">上一页</a>&nbsp;&nbsp;
+                <a href="/new?page=<%= +page+1 %>" id="back">下一页</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="/jquery-1.11.3.js"></script>

@@ -1,0 +1,40 @@
+<script>
+    // let p1=new Promise((resolve,reject)=>{
+    //     reject("哈哈哈");
+    // })
+    // let p2=p1.then((value)=>{
+    //     return 100
+    // },(reason)=>{
+    //     return 200
+    // })
+    // p2.then((value)=>{
+    //     console.log("成功"+value)
+    // },(reason)=>{
+    //     console.log("失败"+reason)
+    // })
+// new Promise((resolve,reject)=>{
+//     resolve(123)
+// }).then((value)=>{
+//     console.log("成功"+value)
+// },(reason)=>{
+//     console.log("失败"+reason)
+// }).then((value)=>{
+//     console.log(value)
+// },function(reason){
+//     console.log(reason)
+// })
+new Promise((resolve,reject)=>(
+    resolve(zwy)
+)).then((value)=>{
+    console.log(`成功：${value}`)
+},(reason)=>{
+    console.log(`失败: ${reason}`)
+}).then((value)=>{
+    console.log(value)
+},(reason)=>{
+    console.log(reason)
+})
+
+
+
+</script>

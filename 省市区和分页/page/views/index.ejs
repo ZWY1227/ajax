@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用ajax开启分页效果</title>
+    <style>
+        .box {
+            width: 800px;
+            height: 800px;
+            background-color: #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        ul {
+            border: 1px solid rgb(160, 160, 240);
+            height: 553px;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        ul li {
+            list-style: none;
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #999;
+        }
+
+        ul li span:nth-child(1) {
+            margin-right: 30px;
+        }
+
+        ul li span p:nth-child(1) {
+            font-size: 18px;
+            color: #333;
+        }
+
+        ul li span p:nth-child(2) {
+            font-size: 16px;
+            color: #999;
+        }
+
+        ol {
+            display: inline-block;
+        }
+
+        ol li {
+            display: inline-block;
+        }
+
+        .footer {
+            text-align: center;
+        }
+
+        ol li {
+            width: 30px;
+            height: 30px;
+            background: blue;
+            margin: 10px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>我的新闻列表</h1>
+        <ul class="ul">
+        </ul>
+        <div class="footer">
+            <a href="JavaScript:;" id="font">上一页</a>
+            <ol class="ol">
+                <li class="li">1</li>
+                <li class="li">2</li>
+                <li class="li">3</li>
+                <li class="li">4</li>
+                <li class="li">5</li>
+                <li class="li">6</li>
+                <li class="li">7</li>
+                <li class="li">8</li>
+            </ol>
+            &nbsp;&nbsp;
+            <a href="JavaScript:;" id="back">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="page"></span>/<span class="pages"></span>
+            </p>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    let flag=true
+    let page = 1
+    function getFun(page) {
+        $.ajax({
+            url: "/news",
+            type: "get",
+            data: { page },
+            dataType: "json",
+            success: function (data){
+                let str = ""
+                if(data.arr.length){
+                    flag=true;
+                    for (var i = 0; i < data.arr.length; i++) {
+                    str += ` <li>
+                <span>
+                    <img src="${data.arr[i].Ifileurl}">
+                </span>
+                <span>
+                    <p>${data.arr[i].Ititle}</p>
+                    <p>${data.arr[i].Icontent}</p>
+                </span>
+            </li>`
+                }
+                $(".ul").html(str)
+                $(".page").text(data.page)
+                $(".pages").text(data.pages)
+                }else{
+                    flag=false;
+                }
+              
+            }
+        })
+    }
+    getFun(page)
+    // 上一页
+    $("#font").click(function () {
+        let nowpage=$(".page").text()
+        if (nowpage >= 2) {
+            getFun(--nowpage)
+        }
+        $(".li").eq(nowpage-1).css("backgroundColor","red").siblings().css("backgroundColor","blue")
+       
+    })
+    //下一页
+    $("#back").click(function () {
+        let nowpage=$(".page").text()
+        if (nowpage >= 1) {
+            if(flag){
+                getFun(++nowpage)
+            }   
+        }
+        $(".li").eq(nowpage-1).css("backgroundColor","red").siblings().css("backgroundColor","blue")
+       
+    })
+    $(".ol").children().click(function(){
+        $(this).css("backgroundColor","red").siblings().css("backgroundColor","blue")
+        let page=$(this).text();
+        getFun(page)
+    })
+
+</script>

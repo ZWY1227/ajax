@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用jq封装好的jsonp</title>
+</head>
+<body>
+    <div>
+        <h1>使用jq封装好的jsonp</h1>
+        <button id="btn">点击我来获取4000端口的数据</button>
+    </div>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    $("#btn").click(function(){
+        // console.log("1")
+        $.ajax({
+            url:"http://127.0.0.1:4000/jsonp",
+            dataType:"jsonp",
+            type:"get",
+            success:function(res){
+                console.log(res)
+            }
+        })
+    })
+
+
+
+</script>

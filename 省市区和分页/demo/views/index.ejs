@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>省市级三级联动</title>
+</head>
+<body>
+    <h1>实现省市级三级联动</h1>
+    <select name="" id="province">
+        <option value="">--请选择省--</option>
+    </select>
+    <select name="" id="city">
+        <option value="">--请选择市--</option>
+    </select>
+    <select name="" id="area">
+        <option value="">--请选择区--</option>
+    </select>
+</body>
+</html>
+<script>
+    let province=document.querySelector("#province")
+    let city=document.querySelector("#city")
+    let area=document.querySelector("#area")
+
+    let xhr=new XMLHttpRequest();
+    xhr.open("get","/province");
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            let res=xhr.responseText
+            // console.log(res)
+            let provinces=JSON.parse(res)
+            let str='<option value="">--请选择省--</option>'
+            provinces.forEach(item=>{
+                str+="<option value="+item+">"+item+"</option>"
+            })
+            province.innerHTML=str;
+        }
+    }
+    xhr.send(null)
+    province.onchange=function(){
+        // alert("11")
+        // alert(this.value)
+        xhr.open("get","/city?province="+this.value);
+        xhr.onreadystatechange=function(){
+       
+        if(xhr.readyState==4 && xhr.status==200){
+            let re=JSON.parse(xhr.responseText)
+            let str='<option value="">--请选择市--</option>'
+            // console.log(re)
+            re.forEach(item=>{
+                str+="<option value="+item+">"+item+"</option>"
+            })
+           city.innerHTML=str
+        }
+    }
+    xhr.send(null)
+    }
+
+
+// ======================
+city.onchange=function(){
+        // alert("11")
+        alert(this.value)
+        xhr.open("get","/area?city="+this.value);
+        xhr.onreadystatechange=function(){
+       
+        if(xhr.readyState==4 && xhr.status==200){
+            let ree=JSON.parse(xhr.responseText)
+            // console.log(ree)
+            let str='<option value="">--请选择区--</option>'
+            ree.forEach(item=>{
+                str+="<option value="+item+">"+item+"</option>"
+            })
+           area.innerHTML=str
+        }
+    }
+    xhr.send(null)
+    }
+
+</script>

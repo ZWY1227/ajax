@@ -1,0 +1,62 @@
+<script>
+    // 第一个
+    // let p1 = new Promise((resolve, reject) => {
+    //     reject(100);//此处是错误状态的,走reson
+    // })
+    // let p2 = p1.then((value) => {
+
+    // }, (reason) => {
+    //     throw new Error("xxx") //此处抛出错误,下面的走reason
+    // })
+    // p2.then((value) => {
+    //     console.log(value)
+    // }, (reason) => {
+    //     console.log("失败" + reason) //失败Error: xxx
+    // }) 
+    // 第二个
+    // let p1 = new Promise((resolve, reject) => {
+    //     reject(100);//走reason
+    // })
+    // let p2 = p1.then((value) => {
+    //     return Promise.resolve("包包");  
+    // }, (reason) => {
+    //     return Promise.reject("没钱")//走reason
+    // })
+    // p2.then((value)=>{
+    //     console.log(value)  
+    // },(reason)=>{
+    //     console.log(reason) //没钱
+    // }) 
+    // 第三个
+    //  let p1 = new Promise((resolve, reject) => {
+    //     reject(100);//走reason
+    // })
+    // let p2 = p1.then((value) => {
+    //     return 666; 
+    // }, (reason) => {
+    //     return -666;//不满足错误条件,1,没抛出,2没有promise来reject,所以走成功
+    // })
+    // p2.then((value)=>{  
+    //     console.log("ok"+value) //0k -666 
+    // },(reason)=>{
+    //     console.log("不 ok"+reason) 
+    // }) 
+    //第四个
+    new Promise((resolve,reject)=>{
+        resolve(a);//这里会抛出错误,所以走reason(走reason两种情况,1,reject 2,抛出错误 直接走错误,不带考虑的)
+    }).then((value)=>{
+        console.log(`成功：${value}`)
+    },(reason)=>{
+        console.log(`失败：${reason}`)//失败,抛出的错误a is not define
+    }).then((value)=>{
+        console.log(`成功：${value}`)//这里走成功,成功 undefined
+    },(reason)=>{
+        console.log(`失败：${reason}`)
+    })
+
+
+
+
+
+
+</script>

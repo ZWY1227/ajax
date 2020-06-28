@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用jq的ajax检测用户名</title>
+</head>
+
+<body>
+    <h2>注册用户</h2>
+    <form action="" method="">
+        <ul>
+            <li>
+                <label for="">用户名：</label>
+                <input type="text" name="username" id="user"> <span id="msg"></span>
+            </li>
+            <li>
+                <label for="">密码：</label>
+                <input type="text" name="password">
+            </li>
+            <li>
+                <label for="">确认密码：</label>
+                <input type="text" name="repassword">
+            </li>
+            <li>
+                <label for=""></label>
+                <input type="submit" value="注册">
+            </li>
+        </ul>
+    </form>
+</body>
+<script src="/jquery1.11.3.js"></script>
+<script>
+    /* ===================  使用$.get发送get请求
+     $("#user").on("blur",function(){
+        let username = $(this).val();
+        $.get("/check",{username},function(res){
+            console.log(res)
+            $("#msg").text(res)
+        })
+    }) */
+
+    /*  ===================  使用$.get发送get请求
+       $("#user").on("blur",function(){
+        let username = $(this).val();
+        $.post("/check",{username},function(res){
+            console.log(res)
+            $("#msg").text(res)
+        })
+    })  */
+
+    $("#user").on("blur", function () {
+        let username = $(this).val();
+        $.ajax({
+            url:"/check",
+            type:"get",
+            data:{username},
+            dataType:"json",
+            async:true,
+            success:function(res){
+                console.log(res)
+                $("#msg").text(res.msg)
+            },
+            error:function(err){
+                console.log(err)
+            }
+        })
+    }) 
+</script>
+
+</html>

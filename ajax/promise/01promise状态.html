@@ -1,0 +1,21 @@
+!
+<script>
+    // 四个术语：fullfill reject value reason
+    //三种状态：pending  resolve reject
+    //两个结果 value reason
+    //注意，状态一旦成功就不能失败，一旦失败就不能成功了
+    // 把处于pending状态的promise转成成功的promise会触发onFullFiled
+    //把处于pending状态的promise转成失败的promise会触发onReject
+//(1)let p1=new Promise()//Promise resolver undefined is not a function
+// (2)let p1=new Promise(function(resolve,reject){
+// })
+// console.log(p1)//Promise {<pending>}等待状态
+// (3)let p1=new Promise((resolve,reject)=>{
+//     resolve()
+// })
+// console.log(p1)//Promise {<resolved>: undefined}//转成功
+// (4)let p1=new Promise((resolve,reject)=>{
+//     reject()
+// })
+// console.log(p1)//Promise {<rejected>: undefined}//转失败
+</script>

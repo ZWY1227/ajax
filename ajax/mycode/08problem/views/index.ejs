@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>演示跨域问题</title>
+</head>
+<body>
+    <div>
+        <h1>演示跨域问题</h1>
+        <button id="btn">点击调用接口</button>
+    </div>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<script>
+    $("#btn").click(function(){
+        $.ajax({
+            url:"https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=6956484",
+            type:"get",
+            success:function(res){
+                console.log("请求接口成功")
+            },
+            error:function(err){
+                console.log("请求接口失败")
+            }
+        })
+    })
+// 出现跨域问题http://127.0.0.1:3000/和https://m.maizuo.com/
+//跨域问题：为了更加安全，此时协议不同，端口号不同，域名不同
+// 要保持同源也就是保证，协议，域名，端口号一致，有严格的要求，
+//而跨域问题只有在ajax中才会出现
+
+
+
+</script>

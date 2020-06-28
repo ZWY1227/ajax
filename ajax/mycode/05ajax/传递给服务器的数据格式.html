@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传递给服务器的数据格式</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+// 常见的格式如下：
+// application/x-www-form-urlencoded   最最常用的  字符串   name=java&age = 23
+// multipart/form-data  也比较常用  文件上传  提交表单
+// raw  可以上传任意格式的文本，可以上传text、json、xml、html等
+// binary  上传二进制数据
+// 111，试一下
+// let xhr=new XMLHttpRequest()
+// xhr.open("get","./data.json?a=1&b=2")
+// xhr.send()
+// 222,试一下
+let xhr=new XMLHttpRequest();
+xhr.open("post","data.json");
+// 设置发送格式
+xhr.setRequestHeader("Content-Type",'application/x-www-form-urlencoded')
+xhr.send("a=1&b=2")
+// 33,试一下
+// let xhr=new XMLHttpRequest()
+// xhr.open("post","./data.json")
+// xhr.setRequestHeader("Content-Type","multipart/form-data")
+// let formData=new FormData()
+// formData.append("a",1)
+// formData.append("b",2)
+// xhr.send(formData)
+
+
+
+
+
+</script>

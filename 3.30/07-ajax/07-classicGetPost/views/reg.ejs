@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用ajax检测用户名</title>
+</head>
+<body>
+    <h2>注册用户</h2>
+    <form action="" method="">
+        <ul>
+            <li>
+                <label for="">用户名：</label>
+                <input type="text" name="username" id="user"> <span id="msg"></span>
+            </li>
+            <li>
+                <label for="">密码：</label>
+                <input type="text" name="password">
+            </li>
+            <li>
+                <label for="">确认密码：</label>
+                <input type="text" name="repassword">
+            </li>
+            <li>
+                <label for=""></label>
+                <input type="submit" value="注册">
+            </li>
+        </ul>
+    </form>
+</body>
+<script>
+   /*  // 获取input框  ==================== get请求
+    let input = document.querySelector("#user")
+    let span = document.querySelector("#msg")
+    input.onblur = function(){
+        let username = encodeURIComponent(this.value);
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","/check?username="+username);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                span.innerHTML = xhr.responseText; 
+            }
+        }
+        xhr.send(null); 
+    } */
+
+     // 获取input框  ==================== post请求
+    let input = document.querySelector("#user")
+    let span = document.querySelector("#msg")
+    input.onblur = function(){
+        let username = encodeURIComponent(this.value);
+        let xhr = new XMLHttpRequest();
+        xhr.open("post","/check");
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                span.innerHTML = xhr.responseText; 
+            }
+        }
+        xhr.send("username="+username); 
+    }
+</script>
+</html>

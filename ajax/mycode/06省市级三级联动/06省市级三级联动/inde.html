@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现省市级三级联动</title>
+    <script src="./jquery-1.11.3.js"></script>
+</head>
+<body>
+    <div id="address">
+        <label for="">家庭住址：</label>
+         <select name="" id="provice">
+             <option value="">请选择省份</option>
+         </select>
+         <select name="" id="city">
+            <option value="">请选择城市</option>
+        </select>
+        <select name="" id="area">
+            <option value="">请选择地区</option>
+        </select>
+    </div>
+</body>
+</html>
+
+<!-- <script>
+ 
+
+        $.ajax({
+            url:"./data.json",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                // 循环添加省份
+                for(var key in data){
+                    $("#provice").append("<option value="+key+">"+key+"</option>");}
+                // 为省份option注册改变事件，获取被选中的那个城市
+                $("#provice").change(function () {
+                    var now_provice=$("#provice option:selected").val();
+                    // 操作之前先把城市框内清空（上次添加的）（包括请输入城市）
+                    $("#city").empty();
+                    // 清空后，第一件事先把请输入城市添加进去
+                    $("#city").append("<option >请输入城市</option>");
+                    // 循环添加被选择的那个省份对应的城市
+                    for(var key in data[now_provice]){
+                        $("#city").append("<option value="+key+">"+key+"</option>");
+                    }
+                    // 为城市注册改变事件
+                    $("#city").change(function () {
+                        // 获取城市的option内容
+                        var now_city=$("#city option:selected").val();
+                        // 操作之前先清空之间的内容
+                        $("#area").empty();
+                        // 然后把请输入地区这个默认值给添加上去
+                        $("#area").append("<option >请输入地区</option>");
+                        // 循环添加被选中省份的被选中城市里面的每一项就是区
+                        for(var k in data[now_provice][now_city]){
+                            $("#area").append("<option value="+data[now_provice][now_city][k]+">"+data[now_provice][now_city][k]+"</option>");
+                        }
+                    })
+                })
+            }
+        })       
+  
+</script> -->
+<script>
+    $.ajax({
+        url:"./data.json",
+        type:"get",
+        data:"json",
+        success:function(data){
+            console.log(data)
+            for(let p in data){
+                // console.log(p)
+                $("#provice").append("<option value="+p+">"+p+"</option>")
+            }
+            $("#provice").change(function(){
+                let provice=$("#provice option:selected").val()
+                // console.log(provice)
+                $("#city").empty()
+                $("#city").append("<option value=''>请选择城市</option>")
+                for(let c in data[provice]){
+                    // console.log(c)
+                    $("#city").append("<option value="+c+">"+c+"</option>")
+                }
+            $("#city").change(function(){
+                let city=$("#city option:selected").val()
+                console.log(city)
+                $("#area").empty()
+                $("#area").append("<option value=''>请选择地区</option>")
+                // for(let key in data[provice][city].length){
+                    for(var a in data[provice][city]){
+                         $("#area").append("<option value="+data[provice][city][a]+">"+data[provice][city][a]+"</option>")
+                    }
+                })     
+            })
+        }
+    })
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>省市区三级联动</title>
+</head>
+
+<body>
+    <h1>选择家庭住址:</h1>
+    <label for="">省:</label>
+    <select name="" id="provice">
+        <option value="" id="">请选择省份</option>
+    </select>
+    <label for="">市:</label>
+    <select name="" id="city">
+        <option value="" id="">请选择市份</option>
+    </select>
+    <label for="">区:</label>
+    <select name="" id="area">
+        <option value="" id="">请选择区份</option>
+    </select>
+</body>
+</html>
+<script src="./jquery-1.11.3.js"></script>
+<script>
+    $.ajax({
+        url: "./data.json",
+        type: "get",
+        dataType: "json",
+        success: function (data) {
+            console.log(data)
+            let pro = ""
+            // 省========一层for循环搞定
+            for (var p = 0; p < data.length; p++) {
+                // console.log(data[p].n)
+                pro += "<option value=" + data[p].n + ">" + data[p].n + "</option>"
+            }
+            $("#provice").append(pro)
+            // 市====二层for循环搞定
+            $("#provice").change(function () {
+                let proviced = $("#provice option:selected").val()
+                let city = ""
+                for (var c = 0; c < data.length; c++) {
+                    for (var C = 0; C < data[c].s.length; C++) {
+                        if (data[c].n == proviced) {
+                            city += "<option value=" + data[c].s[C].n + ">" + data[c].s[C].n + "</option>"
+                        }
+                        $("#city").empty().append("<option>请选择市份</option>").append(city)
+                    }
+                }
+                //  区===三层for循环搞定
+                $("#city").change(function () {
+                    let cited = $("#city option:selected").val()
+                    let area = ""
+                    for (var c = 0; c < data.length; c++) {
+                        for (var C = 0; C < data[c].s.length; C++) {
+                            if (data[c].s[C].n == cited) {
+                                if (data[c].s[C].s) {
+                                    for (var a = 0; a < data[c].s[C].s.length; a++) {
+                                        area += "<option value=" + data[c].s[C].s[a].n + ">" + data[c].s[C].s[a].n + "</option>"
+                                    }
+                                    $("#area").empty().append("<option>请选择区份</option>").append(area)
+                                }
+                            }
+                        }
+                    }
+                })
+            })
+        }
+    })
+</script>

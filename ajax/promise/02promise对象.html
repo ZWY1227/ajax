@@ -1,0 +1,27 @@
+<script>
+let p=new Promise((resolve,reject)=>{
+    // resolve("成功状态")
+    reject("失败状态")
+})
+p.then(function(value){
+      console.log(value)
+      },function(reason){
+          console.log(reason)
+         }).then((value)=>{
+             console.log(`成功${value}`)
+         },(reason)=>{
+             console.log(`失败${reason}`)
+         })
+console.log(p)
+         ///每一个then返回一个新的promise。
+         //第一次then看的是执行器是resolve还是reject
+         //第二次看的是第一次的then里面怎么处理的，此时需要注意三点
+         //1，p1.then中 不论是成功的方法，还是失败失方法中，只要抛出了异常，p2就变成失败
+         //2）p1.then中也可以返回返回一个新的promise  p2的成功还失败看这个新的promise是成功还是失败
+         //3）剩的情况，基本上都是让p2变成成功的promise，如果方法中有返回值，作为p2的value值，上一个then中方法返回的结果会传递到下一个then中方法中
+         
+
+
+
+
+</script>

@@ -1,0 +1,20 @@
+<studentList>
+    <studentItem>
+        <id>1</id>
+        <name>旺财</name>
+        <age>10</age>
+    </studentItem> 
+    <studentItem>
+        <id>2</id>
+        <name>小强</name>
+        <age>10</age>
+    </studentItem> 
+</studentList>
+
+
+
+
+
+
+
+

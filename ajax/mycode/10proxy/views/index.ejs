@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用代理解决跨域问题</title>
+</head>
+<body>
+    <div>
+        <h1>使用proxy代理解决跨域问题</h1>
+        <button id="btn">点击我访问4000端口的数据</button>
+    </div>
+</body>
+</html>
+<script src="/jquery-1.11.3.js"></script>
+<!-- <script>
+// 使用代理解决跨域问题
+$("#btn").click(function(){
+    // alert("1")
+    let realurl="http://127.0.0.1:4000/proxy"
+    $.ajax({
+        url:"/proxy",
+        data:{realurl},
+        type:"get",
+        dataType:"json",
+        success:function(res){
+            console.log(res)
+        }
+    })
+})
+</script> -->
+<script>
+    $("#btn").click(function(){
+        // console.log("111")
+        let realurl="http://127.0.0.1:4000/proxy"
+        $.ajax({
+            url:"/proxy",
+            type:"get",
+            data:{realurl},
+            dataType:"json",
+            success:function(suc){
+                console.log(suc)
+            },
+            error:function(err){
+                console.log(err)
+            }
+
+
+        }
+
+        )
+    })
+
+
+</script>
+

@@ -1,0 +1,40 @@
+<script>
+ // 处于等待状态的pormise
+    //  let p = new Promise((resolve,reject)=>{});
+// console.log(p)
+//来直接创建一个失败的promise
+// Promise.reject("没钱").then((value)=>{
+//      //如果promise成功了走第一个函数
+// },(reason)=>{
+//     //如果promise失败了走第二个函数
+//     //这里直接创建的就是失败的promise
+//     //所以不跑错的情况直接走这里
+//     console.log(reason)//没钱
+// }).then((value)=>{
+//         console.log(value)//没返回所以undefined
+//         throw new Error("xxx")
+// },(reason)=>{
+
+// }).then(()=>{},(reason)=>{
+//     console.log("失败了"+reason)//失败了+Error("xxx")
+// })
+// Promise.resolve("包包").then(null,reason=>{
+//         console.log(reason)
+//     }).then(null,reason=>{
+//         console.log(reason)
+//     }).then(value=>{
+//         console.log("xxx"+value)
+//     },reason=>{
+//         console.log(reason)
+//     })
+//  Promise.reject("没钱").then(value=>{
+//         console.log(value)
+//     }).then(null,reason=>{
+//         console.log("xxx"+reason)
+//     }) 
+// Promise.reject("没钱").then(value=>{
+//         console.log(value)
+//     }).catch(reason=>{  
+//         console.log("xxx"+reason)
+//     })
+</script>
